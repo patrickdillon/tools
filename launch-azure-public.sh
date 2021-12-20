@@ -10,10 +10,12 @@ cluster_name=padillon$(date +%m%d%H%M)
 pull_secret=$(cat /home/padillon/.docker/config.json)
 ssh_key=$(cat /home/padillon/.ssh/openshift-dev.pub)
 credential_path=/home/padillon/work/backup/public-azure.service-principal.json
-release_image_override=registry.ci.openshift.org/ocp/release:4.10.0-0.nightly-2021-11-19-134958 
+release_image_override=quay.io/openshift-release-dev/ocp-release:4.9.11-x86_64
+install_script=/home/padillon/ct/install-scripts/azure-mkt.sh
 
 #TODO Allow release image to be set, with default
 #TODO Check pull secret can pull release image
+#TODO Script in container for create/destroy cluster
 
 pushd "${installer_dir}" && ./hack/build.sh && popd
 
@@ -38,5 +40,7 @@ podman run --rm -it                                              \
     -v "${cluster_dir}":/c/:z                                    \
     -v "${installer}":/openshift-install                         \
     -v "${credential_path}":/root/.azure/osServicePrincipal.json \
+    -v "${install_script}":/install.sh \
     -e OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE="${release_image_override}" \
-    fedora:latest /bin/bash
+    -e KUBECONFIG="/c/auth/kubeconfig" \
+    installer-wwt:latest /bin/bash
