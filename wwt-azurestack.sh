@@ -11,7 +11,7 @@ pull_secret_path=/home/padillon/.docker/config.json
 pull_secret=$(cat $pull_secret_path)
 ssh_key=$(cat /home/padillon/.ssh/openshift-dev.pub)
 credential_path=/home/padillon/work/secrets/wwt-ash-service-principal.json
-release_image_override=registry.ci.openshift.org/ocp/release:4.10.0-0.nightly-2022-01-25-023600
+release_image_override=quay.io/openshift-release-dev/ocp-release:4.10.0-fc.4-x86_64
 
 #TODO this is not the best way to handle this
 install_script=/home/padillon/ct/install-scripts/azurestack-ipi-ca-proxy-workaround.sh
