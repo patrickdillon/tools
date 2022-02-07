@@ -33,7 +33,7 @@ platform:
     baseDomainResourceGroupName: os4-common
     cloudName: AzureStackCloud
     region: ppe3
-    ClusterOSImage: https://rhcossa.blob.ppe3.stackpoc.com/vhd/rhcos-49-84-202108221651.vhd
+    ClusterOSImage: https://rhcosvhdsa.blob.ppe3.stackpoc.com/vhd/rhcos-410.84.202112040202-0-azurestack.x86_64.vhd
 pullSecret: '$pull_secret'
 sshKey: |
   $ssh_key
