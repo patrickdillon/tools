@@ -9,9 +9,9 @@ cluster_dir=${PWD}/test-clusters/"$(date +%Y%m%d%H%M)"-$dir_suffix
 cluster_name=padillon$(date +%m%d%H%M)
 pull_secret=$(cat /home/padillon/.docker/config.json)
 ssh_key=$(cat /home/padillon/.ssh/openshift-dev.pub)
-credential_path=/home/padillon/work/backup/public-azure.service-principal.json
+credential_path=/home/padillon/work/secrets/mag-service-principal.json
 release_image_override=quay.io/openshift-release-dev/ocp-release:4.9.21-x86_64
-install_script=/home/padillon/ct/install-scripts/azure-mkt.sh
+install_script=/home/padillon/ct/install-scripts/vanilla.sh
 
 #TODO Allow release image to be set, with default
 #TODO Check pull secret can pull release image
@@ -29,8 +29,8 @@ metadata:
 platform:
   azure:
     baseDomainResourceGroupName: os4-common
-    cloudName: AzurePublicCloud
-    region: centralus
+    cloudName: AzureUSGovernmentCloud
+    region: usdodcentral
 pullSecret: '$pull_secret'
 sshKey: |
   $ssh_key

@@ -41,4 +41,7 @@ stringData:
 EOF
 done
 
+rm credentials-request/0000_30_capi-operator_00_credentials-request.yaml
+rm c/manifests/0000_30_capi-operator_00_credentials-secret.yaml
+
 ./openshift-install create cluster --dir c --log-level debug

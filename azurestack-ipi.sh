@@ -16,6 +16,7 @@ region=$(yq e .platform.azure.region c/install-config.yaml)
 resource_group=$(yq e .status.platformStatus.azure.resourceGroupName c/manifests/cluster-infrastructure-02-config.yml)
 
 oc adm release extract "$release_image" --credentials-requests --cloud=azure --to=credentials-request
+exit
 ls credentials-request
 files=$(ls credentials-request)
 for f in $files
@@ -39,5 +40,8 @@ stringData:
   azure_region: ${region}
 EOF
 done
+
+rm credentials-request/0000_30_capi-operator_00_credentials-request.yaml
+rm c/manifests/0000_30_capi-operator_00_credentials-secret.yaml
 
 ./openshift-install create cluster --dir c --log-level debug
