@@ -12,7 +12,7 @@ pull_secret=$(cat $pull_secret_path)
 ssh_key=$(cat /home/padillon/.ssh/openshift-dev.pub)
 credential_path=/home/padillon/work/secrets/ash-ppe-service-principal.json
 install_script=/home/padillon/ct/install-scripts/azurestack-ipi.sh
-release_image_override=quay.io/openshift-release-dev/ocp-release:4.10.0-fc.4-x86_64
+release_image_override=registry.build01.ci.openshift.org/ci-ln-6pqblrk/release:latest
 
 #TODO Allow release image to be set, with default
 #TODO Check pull secret can pull release image
@@ -41,10 +41,10 @@ EOF
 
 podman run --rm -it                                              \
     -v "${cluster_dir}":/c/:z                                    \
-    -v "${installer}":/openshift-install                         \
-    -v "${credential_path}":/root/.azure/osServicePrincipal.json \
-    -v "${pull_secret_path}":/root/.docker/config.json \
-    -v "${install_script}":/install.sh \
+    -v "${installer}":/openshift-install:z                         \
+    -v "${credential_path}":/root/.azure/osServicePrincipal.json:z \
+    -v "${pull_secret_path}":/root/.docker/config.json:z \
+    -v "${install_script}":/install.sh:z \
     -e OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE="${release_image_override}" \
     -e KUBECONFIG="/c/auth/kubeconfig" \
     install-tools:latest /bin/bash

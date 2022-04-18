@@ -10,8 +10,8 @@ cluster_name=padillon$(date +%m%d%H%M)
 pull_secret=$(cat /home/padillon/.docker/config.json)
 ssh_key=$(cat /home/padillon/.ssh/openshift-dev.pub)
 credential_path=/home/padillon/work/backup/public-azure.service-principal.json
-release_image_override=quay.io/openshift-release-dev/ocp-release:4.9.21-x86_64
-install_script=/home/padillon/ct/install-scripts/azure-mkt.sh
+release_image_override=quay.io/openshift-release-dev/ocp-release:4.10.6-x86_64
+install_script=/home/padillon/ct/install-scripts/vanilla.sh
 
 #TODO Allow release image to be set, with default
 #TODO Check pull secret can pull release image
